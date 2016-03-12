@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "Egg Hack",
+  "description": "The extension that sends you on an Easter Egg hunt around the internet!",
+  "version": "1.0",
+
+  "icons": { "16": "egghack_icon16.png",
+             "48": "egghack_icon48.png",
+            "128": "egghack_icon128.png"
+  },
+
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+
+  "permissions": [
+    "storage"
+  ],
+
+  "content_scripts": [ {
+    "js": [  "jquery.min.js" ],
+    "matches": [ "http://*/*", "https://*/*"]
+  }]
+}
