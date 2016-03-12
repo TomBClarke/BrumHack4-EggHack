@@ -2,13 +2,13 @@ var tree;
 
 var testJSON = [
     { eggid: 0, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 0, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 0, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 0, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 0, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 0, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 0, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 0, location: google.com, value: 1, tos: [id, id, id] }
+    { eggid: 1, location: youtube.com, value: 1, tos: [id, id, id] },
+    { eggid: 2, location: facebook.com, value: 1, tos: [id, id, id] },
+    { eggid: 3, location: twitter.com, value: 1, tos: [id, id, id] },
+    { eggid: 4, location: bing.com, value: 1, tos: [id, id, id] },
+    { eggid: 5, location: .com, value: 1, tos: [id, id, id] },
+    { eggid: 6, location: google.com, value: 1, tos: [id, id, id] },
+    { eggid: 7, location: google.com, value: 1, tos: [id, id, id] }
 ];
 
 function makeTree(rawJSON) {
