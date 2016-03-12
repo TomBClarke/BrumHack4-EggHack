@@ -1,4 +1,5 @@
-var tree;
+var nodes;
+var links;
 
 var testJSON = [
     { eggid: 0, location: google.com, value: 1, tos: [1, 2] },
@@ -35,7 +36,12 @@ function makeTree(rawJSON) {
         .attr("class", "gnode");
 }
 
+
 function processJSON(rawJSON) {
+    var json 
+}
+
+function processJSON1(rawJSON) {
     var json = JSON.parse(rawJSON);
     
     //{ eggid: 0, location: google.com, value: 1, tos: [id, id, id] }
