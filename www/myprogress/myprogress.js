@@ -1,14 +1,13 @@
 var tree;
 
 var testJSON = [
-    { eggid: 0, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 1, location: youtube.com, value: 1, tos: [id, id, id] },
-    { eggid: 2, location: facebook.com, value: 1, tos: [id, id, id] },
-    { eggid: 3, location: twitter.com, value: 1, tos: [id, id, id] },
-    { eggid: 4, location: bing.com, value: 1, tos: [id, id, id] },
-    { eggid: 5, location: .com, value: 1, tos: [id, id, id] },
-    { eggid: 6, location: google.com, value: 1, tos: [id, id, id] },
-    { eggid: 7, location: google.com, value: 1, tos: [id, id, id] }
+    { eggid: 0, location: google.com, value: 1, tos: [1, 2] },
+    { eggid: 1, location: youtube.com, value: 2, tos: [2] },
+    { eggid: 2, location: facebook.com, value: 2, tos: [3, 4, 5] },
+    { eggid: 3, location: twitter.com, value: 2, tos: [5] },
+    { eggid: 4, location: bing.com, value: 3, tos: [5] },
+    { eggid: 5, location: example.com, value: 3, tos: [6] },
+    { eggid: 6, location: d3.com, value: 3, tos: [] }
 ];
 
 function makeTree(rawJSON) {
@@ -16,12 +15,14 @@ function makeTree(rawJSON) {
     
     force = d3.layout.force()
             .charge(-100)
+            .linkDistance(30)
             .size([width, height]);
     
     var svg = d3.select("#tree").append("svg");
     
     force
         .nodes(tree)
+        .links()
         .start();
     
     // Create all the nodes
