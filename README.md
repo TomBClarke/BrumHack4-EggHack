@@ -1,7 +1,8 @@
 # BrumHack4-EggHack
-Eggcellent ideas
 
-Code from a 24 hour hacking event, obviously not perfect code but it works.
+## Eggcellent ideas ##
+
+Code from [BrumHack 4.0](http://brumhack.co.uk/), obviously not perfect code but it works.
 
 ## Content ##
 
