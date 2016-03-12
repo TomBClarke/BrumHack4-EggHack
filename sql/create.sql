@@ -19,7 +19,8 @@ CREATE TABLE egglinks (
 	eggfrom INTEGER NOT NULL, 
 	eggto INTEGER NOT NULL, 
 	FOREIGN KEY (eggfrom) REFERENCES eggs(eggid), 
-	FOREIGN KEY (eggto) REFERENCES eggs(eggid)
+	FOREIGN KEY (eggto) REFERENCES eggs(eggid),
+	PRIMARY KEY (eggfrom, eggto)
 );
 
 CREATE TABLE found (
@@ -27,5 +28,17 @@ CREATE TABLE found (
 	eggid INTEGER NOT NULL,
 	foundat DATETIME NOT NULL,
 	FOREIGN KEY (userid) REFERENCES user(userid), 
-	FOREIGN KEY (eggid) REFERENCES eggs(eggid)
+	FOREIGN KEY (eggid) REFERENCES eggs(eggid),
+	PRIMARY KEY (userid, eggid)
+	CHECK (
+		eggid IN (
+			SELECT L.eggto
+			FROM egglinks L
+			WHERE L.eggfrom IN (
+				SELECT F.eggid
+				FROM found F
+				WHERE F.userid = userid
+			)
+		)
+	)
 );

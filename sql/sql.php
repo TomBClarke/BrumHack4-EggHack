@@ -14,11 +14,51 @@ function connect() {
 		die("Couldn't select database.");
 }
 
+// create user
+function createUser(user, name, pwd, visible) {
+	connect();
+
+	$sql = sprintf("INSERT INTO user VALUES (default, '%s', '%s', '%s', '%b');",
+		mysql_real_escape_string(user),
+		mysql_real_escape_string(name),
+		mysql_real_escape_string(pwd),
+		visible
+	);
+
+	$result = mysql_query($sql, $db);
+
+	if(!$result)
+    	die("Query failed: " . mysql_error());
+    mysql_close($db);
+
+    // set up user i guess
+}
+
+// set found
+function setFound(userid, eggid) {
+	connect();
+
+	$sql = sprintf("INSERT INTO found VALUES ('%d', '%d', now());",
+		mysql_real_escape_string(userid),
+		mysql_real_escape_string(eggid)
+	);
+
+	$result = mysql_query($sql, $db);
+
+	if(!$result)
+    	die("Query failed: " . mysql_error());
+    mysql_close($db);
+
+    // maybbe return true or false or some shit
+}
+
 // returns { eggid: 0, location: google.com, value: 1, tos: [id, id, id...] }
 function getGottenEggs(userID) {
 	connect();
 
-	$sql = "SELECT F.eggid FROM found F WHERE F.userid = " . userID;
+	$sql = sprintf("SELECT F.eggid FROM found F WHERE F.userid = '$d'", 
+		mysql_real_escape_string(userID)
+	);
 	$sql = "SELECT E.eggid, E.location, E.value FROM eggs E WHERE E.eggid IN ( " . $sql . " ) ORDER BY E.eggid;";
 
 	$result = mysql_query($sql, $db);
