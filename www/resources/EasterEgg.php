@@ -16,7 +16,7 @@ For i = 0 to 10
     message= 10 - i
     Set sapi=CreateObject("sapi.spvoice")
     sapi.Speak message
-    WScript.sleep 10000
+    WScript.sleep 1000
 Next
 
 set shellobj = CreateObject("WScript.Shell")
