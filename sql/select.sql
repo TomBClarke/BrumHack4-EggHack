@@ -35,3 +35,22 @@ FROM eggs E;
 SELECT U.userid, U.username, U.name, U.public
 FROM user U
 WHERE U.username = username AND U.password = password;
+
+-- Get riddle
+SELECT E.riddle
+FROM eggs E
+WHERE E.eggid = eggid AND
+	E.eggid IN (
+	SELECT F.eggid
+	FROM found F
+	WHERE F.userid = userid
+);
+
+-- Get total earned
+SELECT SUM(E.value)
+FROM eggs E
+WHERE E.eggid IN (
+	SELECT F.eggid
+	FROM found F
+	WHERE F.userid = userid
+);

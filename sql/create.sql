@@ -11,6 +11,7 @@ CREATE TABLE eggs (
 	eggid INTEGER NOT NULL, 
 	location VARCHAR(100) NOT NULL, 
 	redirect VARCHAR(40) NOT NULL, 
+	riddle VARCHAR(100000000) NOT NULL,
 	value INTEGER, 
 	PRIMARY KEY (eggid)
 );
