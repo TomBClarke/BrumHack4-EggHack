@@ -68,7 +68,7 @@ function getGottenEggs(userID) {
 
     $json = "";
     while($row = mysql_fetch_array($result)) {
-		$json = $json . "{eggid:" . $row['eggid'] . ",location:" . $row['location'] . ",value:" . $row['value'];
+		$json = $json . "{id:" . $row['eggid'] . ",location:" . $row['location'] . ",value:" . $row['value'];
 
     	$sql = "SELECT L.eggto FROM egglinks L WHERE L.getfrom = " . $row['eggid'] . "ORDER BY L.eggto;";
     	$rresult = mysql_query($sql, $db);
