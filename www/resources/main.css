@@ -1,0 +1,13 @@
+#navbar {
+    background-color: chartreuse;
+}
+
+#titleImage {
+    width:250px;
+    height:100px;
+}
+
+#navbar span {
+    padding:10px;
+    background-color: darkgreen;
+}
