@@ -36,7 +36,7 @@ SELECT U.userid, U.username, U.name, U.public
 FROM user U
 WHERE U.username = username AND U.password = password;
 
---Get website list
+-- Get website list
 SELECT E.location
 FROM eggs E
 WHERE E.eggid in (
@@ -48,3 +48,8 @@ WHERE E.eggid in (
 		WHERE F.userid = userid
 	)
 );
+
+-- Get user
+SELECT U.userid, U.username, U.name
+FROM user U
+WHERE U.username = username AND U.password = password;
