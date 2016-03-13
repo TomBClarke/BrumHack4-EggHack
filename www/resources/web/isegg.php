@@ -1,10 +1,14 @@
 <?php 
 	session_start();
-	include( "resources/web/sql.php"); 
+	include( "sql.php"); 
 
-	if(isset($_SESSION['user']) and isset($_POST["userid"]) and isset($_POST["eggid"])) {
-		echo getegg();
+	if(isset($_SESSION['user']) and isset($_POST["website"])) {
+		echo isegg($_SESSION['user']['userid'], filterURL($_POST["website"]));
 	} else {
 		echo 0;
+	}
+
+	function filterURL($input) {
+		return $input;
 	}
 ?>

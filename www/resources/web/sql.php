@@ -20,8 +20,6 @@ function createUser($user, $name, $pwd, $visible) {
 		mysqli_real_escape_string($db, $pwd)
 	);
 
-	echo $sql;
-
 	$result = mysqli_query($db, $sql);
 
     mysqli_close($db);
@@ -41,8 +39,6 @@ function loadUser($user, $password) {
 		mysqli_real_escape_string($db, $password)
 	);
 
-	echo $sql;
-
 	$result = mysqli_query($db, $sql);
 
     mysqli_close($db);
@@ -58,8 +54,6 @@ function getUserPoints($userid) {
 		mysqli_real_escape_string($db, $userid)
 	);
 
-	echo $sql;
-
 	$result = mysqli_query($db, $sql);
 
 	mysqli_close($db);
@@ -74,11 +68,9 @@ function getUserPoints($userid) {
 function getegg($userid, $site) {
 	$db = connect();
 
-	$sql = sprintf("SELECT E.location, E.value FROM eggs E WHERE E.eggid in (SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d'));",
+	$sql = sprintf("SELECT E.location, E.value, E.riddle FROM eggs E WHERE E.eggid in (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
 		mysqli_real_escape_string($db, $userid)
 	);
-
-	echo $sql;
 
 	$result = mysqli_query($db, $sql);
 
@@ -95,59 +87,77 @@ function getegg($userid, $site) {
     return 0;
 }
 
-// set found
-function setFound($userid, $eggid) {
+// see's if egg is valid (to)
+function isegg($userid, $website) {
 	$db = connect();
 
-	$sql = sprintf("SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
+	// get list of tos
+	// see if it is in the list of tos
+	$sql = sprintf("SELECT E.location, E.eggid FROM eggs E WHERE E.eggid IN (SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d'));",
 		mysqli_real_escape_string($db, $userid)
 	);
 
-	echo $sql;
-
 	$result = mysqli_query($db, $sql);
 
-	if(!$result)
-    	return "fail";
+	if(!$result || mysqli_num_rows($result) == 0) {
+	    mysqli_close($db);
+    	return 0;
+	}
 
-    $matching = false;
-    while($row = mysqli_fetch_array($result)) {
-		if ($eggid == $row['eggto'])
-			$matching = true;
+    $eggid = 0;
+	while($row = mysqli_fetch_array($result)) {
+    	if ($site == $row['location'])
+    		$eggid = $row['eggid'];
     }
 
-    if (!$matching)
+    if ($eggid == 0) {
+	    mysqli_close($db);
+	    return 0;
+    }
+
+    // list of tos I have
+    $sql = sprintf("SELECT L.eggto FROM egglinks L WHERE L.eggto = " . $eggid . " AND L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
+		mysqli_real_escape_string($db, $userid)
+	);
+	$result = mysqli_query($db, $sql);
+	$myLength = mysqli_num_rows($result);
+
+	// list of tos in full
+	$sql = "SELECT L.eggto FROM egglinks L WHERE L.eggto = " . $eggid . ";";
+	$result = mysqli_query($db, $sql);
+	$fullLength = mysqli_num_rows($result);
+
+	mysqli_close($db);
+
+	// if equal then we've found all froms so can get the to
+	if ($myLength == $fullLength) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+// set found
+function setFound($userid, $website) {
+	$canDoIt = isegg($userid, $website);
+
+	if ($canDoIt == 0)
     	return "fail";
+
+	$db = connect();
 
 	$sql = sprintf("INSERT INTO found VALUES ('%d', '%d', now());",
 		mysqli_real_escape_string($db, $userid),
 		mysqli_real_escape_string($db, $eggid)
 	);
 
-	echo $sql;
-
 	$result = mysqli_query($db, $sql);
 
     if(!$result)
     	return "fail";
 
     mysqli_close($db);
-
-    $sql = sprintf("SELECT E.riddle FROM eggs E WHERE E.eggid = '%d';",
-		mysqli_real_escape_string($db, $eggid)
-	);
-
-	echo $sql;
-
-	$result = mysqli_query($db, $sql);
-
-    if(!$result)
-    	return "GENUINE ERROR";
-
-    mysqli_close($db);
-
-    $row = mysqli_fetch_array($result);
-    return $row['riddle'];
+    return "success";
 }
 
 // returns { eggid: 0, location: google.com, value: 1, tos: [id, id, id...] }
@@ -158,8 +168,6 @@ function getGottenEggs($userID) {
 		mysqli_real_escape_string($db, $userID)
 	);
 	$sql = "SELECT E.eggid, E.location, E.riddle, E.value FROM eggs E WHERE E.eggid IN ( " . $sql . " ) ORDER BY E.eggid;";
-
-	echo $sql;
 
 	$result = mysqli_query($db, $sql);
 
