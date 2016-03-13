@@ -17,20 +17,7 @@ function runEgg(response) {
 		    var elems = $('img');
 			var select = Math.floor(Math.random() * elems.length);
 
-			switch (response) {
-				case 1:
-					elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackGreen.png');
-					break;
-				case 2:
-					elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackBlue.png');
-					break;
-				case 3:
-					elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackRed.png');
-					break;
-				case 4:
-					elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackGold.png');
-					break;
-			}
+			elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackGreen.png');
 
 			console.log("here");
 
