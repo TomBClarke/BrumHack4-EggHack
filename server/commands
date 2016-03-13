@@ -1,0 +1,23 @@
+https://dev.mysql.com/doc/refman/5.7/en/ha-vm-aws-setup.html
+
+yum install mysql
+
+http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html
+
+sudo yum update -y
+
+sudo yum install -y httpd24 php56 mysql55-server php56-mysqlnd
+
+sudo service httpd start
+
+sudo chkconfig httpd on
+
+chkconfig --list httpd
+
+GIT
+
+yum install git
+
+correcthorsebatterystaple
+
+https://www.digitalocean.com/community/questions/how-do-i-access-mysql-instance-created-by-lamp-image-when-creating-droplet
