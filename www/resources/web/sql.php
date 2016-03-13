@@ -44,6 +44,26 @@ function createUser($user, $name, $pwd, $visible) {
 	return true;
 }
 
+function beenFound($userid, $website) {
+	$db = connect();
+
+	$sql = "SELECT E.location FROM eggs E WHERE E.eggid in (SELECT F.eggid FROM found F WHERE F.userid = " . $userid . ");";
+
+	$result = mysqli_query($db, $sql);
+
+	mysqli_close($db);
+
+	if(!$result)
+    	return 0;
+
+    while($row = mysqli_fetch_array($result)) {
+    	if ($website == $row['location'])
+    		return 1;
+    }
+
+    return 0;
+}
+
 // login user
 function loadUser($user, $password) {
 	$db = connect();
