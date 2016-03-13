@@ -1,24 +1,23 @@
 <?php
 
-$db = null;
-
 function connect() {
-	$db = null;
-
 	$db = mysqli_connect("localhost", "root", "correcthorsebatterystaple", "egghack");
+	//$db = mysqli_connect("localhost", "root", "", "egghack");
 	if (mysqli_connect_errno()) {
 	    printf("Connect failed: %s\n", mysqli_connect_error());
 	}
+
+	return $db;
 }
 
 // create user
 function createUser($user, $name, $pwd, $visible) {
-	connect();
+	$db = connect();
 
 	$sql = sprintf("INSERT INTO user VALUES (default, '%s', '%s', '%s', " . $visible . ");",
-		mysqli_real_escape_string($user),
-		mysqli_real_escape_string($name),
-		mysqli_real_escape_string($pwd)
+		mysqli_real_escape_string($db, $user),
+		mysqli_real_escape_string($db, $name),
+		mysqli_real_escape_string($db, $pwd)
 	);
 
 	echo $sql;
@@ -35,11 +34,11 @@ function createUser($user, $name, $pwd, $visible) {
 
 // login user
 function loadUser($user, $password) {
-	connect();
+	$db = connect();
 
 	$sql = sprintf("SELECT U.userid, U.username, U.name FROM user U WHERE U.username = '%s' AND U.password = '%s';",
-		mysqli_real_escape_string($user),
-		mysqli_real_escape_string($password)
+		mysqli_real_escape_string($db, $user),
+		mysqli_real_escape_string($db, $password)
 	);
 
 	echo $sql;
@@ -53,10 +52,10 @@ function loadUser($user, $password) {
 
 // gets the users points
 function getUserPoints($userid) {
-	connect();
+	$db = connect();
 
 	$sql = sprintf("SELECT sum(E.value) AS total FROM eggs E WHERE E.eggid in (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
-		mysqli_real_escape_string($userid)
+		mysqli_real_escape_string($db, $userid)
 	);
 
 	echo $sql;
@@ -73,10 +72,10 @@ function getUserPoints($userid) {
 
 // 0 if website is not valid, value of egg otherwise
 function getegg($userid, $site) {
-	connect();
+	$db = connect();
 
 	$sql = sprintf("SELECT E.location, E.value FROM eggs E WHERE E.eggid in (SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d'));",
-		mysqli_real_escape_string($userid)
+		mysqli_real_escape_string($db, $userid)
 	);
 
 	echo $sql;
@@ -98,10 +97,10 @@ function getegg($userid, $site) {
 
 // set found
 function setFound($userid, $eggid) {
-	connect();
+	$db = connect();
 
 	$sql = sprintf("SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
-		mysqli_real_escape_string($userid)
+		mysqli_real_escape_string($db, $userid)
 	);
 
 	echo $sql;
@@ -121,8 +120,8 @@ function setFound($userid, $eggid) {
     	return "fail";
 
 	$sql = sprintf("INSERT INTO found VALUES ('%d', '%d', now());",
-		mysqli_real_escape_string($userid),
-		mysqli_real_escape_string($eggid)
+		mysqli_real_escape_string($db, $userid),
+		mysqli_real_escape_string($db, $eggid)
 	);
 
 	echo $sql;
@@ -135,7 +134,7 @@ function setFound($userid, $eggid) {
     mysqli_close($db);
 
     $sql = sprintf("SELECT E.riddle FROM eggs E WHERE E.eggid = '%d';",
-		mysqli_real_escape_string($eggid)
+		mysqli_real_escape_string($db, $eggid)
 	);
 
 	echo $sql;
@@ -153,10 +152,10 @@ function setFound($userid, $eggid) {
 
 // returns { eggid: 0, location: google.com, value: 1, tos: [id, id, id...] }
 function getGottenEggs($userID) {
-	connect();
+	$db = connect();
 
 	$sql = sprintf("SELECT F.eggid FROM found F WHERE F.userid = '$d'", 
-		mysqli_real_escape_string($userID)
+		mysqli_real_escape_string($db, $userID)
 	);
 	$sql = "SELECT E.eggid, E.location, E.riddle, E.value FROM eggs E WHERE E.eggid IN ( " . $sql . " ) ORDER BY E.eggid;";
 

@@ -1,30 +1,31 @@
 <?php 
 	session_start(); 
 	if(isset($_SESSION['user'])) {
-		if (isset($_GET["viaExtension"]) and $_GET["viaExtension"] === true) {
-			header("Location: /extension.php");
-		} else {
-			header("Location: /index.php");
-		}
+		redirect();
 	}
 
 	include( "resources/web/sql.php"); 
 	$error_signin = false;
 
 	if (isset($_POST["username"]) and isset($_POST["password"])) {
-		$username = $_POST["username"];
-		$password = $_POST["password"];
+		$result = loadUser($_POST["username"], $_POST["password"]);
 
-		$result = loadUser($username, $password);
-
-	    if (!$result or mysql_num_rows($result) == 0) {
+	    if (!$result or mysqli_num_rows($result) == 0) {
 	    	$error_signin = true;
 	    } else {
-		    $row = mysql_fetch_assoc($result);
+		    $row = mysqli_fetch_assoc($result);
 		    session_regenerate_id();
 		    $_SESSION['user'] = $row;
-		    header("Location: /index.php");
+		    redirect();
 	  	} 
+	}
+
+	function redirect() {
+		if (isset($_GET["viaExtension"]) and $_GET["viaExtension"] === true) {
+			header("Location: /extension.php");
+		} else {
+			header("Location: /index.php");
+		}
 	}
 ?>
 
@@ -42,7 +43,7 @@
     <img src="resources/img/EggHack.png" />
     <h1>Sign in to EggHack</h1>
 
-    <form action="index.php" method="post" id="form-signin">
+    <form action="signin.php" method="post" id="form-signin">
 	    <?php if ($error_signin) {?>
 	    <h2>Error signing-in</h2>
 	    <?php } ?>

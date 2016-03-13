@@ -13,7 +13,14 @@
 		$name = $_POST["name"];
 		$pwd = $_POST["password"];
 		$confirm = $_POST["confirm"];
-		$visible = isset($_POST["visible"]) ? 1 : 0;
+
+        // This doesn't work but ah well
+        if (isset($_POST["visible"])) {
+	        $visible =  1;
+            echo $_POST["visible"] ;
+        } else {
+            $visible =  0;
+        }
 
 		if ($user == "" || $name == "" || $pwd == "" || $pwd != $confirm) {
 			$error_signup = true;
@@ -42,7 +49,7 @@
     <form action="index.php" method="post" id="form-signup">
         <?php if ($error_signup) {?>
         <h2>Error signing-up</h2>
-        <?php echo $mysqli->error; } ?>
+        <?php } ?>
 
         <h2 class="form-signin-heading">Registration</h2> Username:
         <input name="username" type="text" placeholder="Username"> Name:
@@ -54,7 +61,7 @@
         <button type="submit">Sign up</button>
     </form>
 
-    <h2>Or <span>sign in</span> and download the <a href="/">extension</a></h2>
+    <h2>Or <a href="signin.php">sign in</a> and download the <a href="/">extension</a></h2>
     <?php } else { ?>
     <?php if(isset($_POST["signupsuccess"]) and $_POST[ "signupsuccess"]=== true) ?>
     <h2>To begin download our <a href="/">extension</a> and begin the hunt!</h2>
