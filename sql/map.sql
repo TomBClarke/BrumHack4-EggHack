@@ -20,8 +20,8 @@ INSERT INTO eggs VALUES (default, "youtube.com", "38.1", 1); -- Part 2 of ip add
 INSERT INTO egglinks VALUES (5, 6);
 
 -- 6
-INSERT INTO eggs VALUES (default, "ibm.com", "Zwys Uccuzs pih kcfgs.", 2); -- Like Google but Worse encrypted with caesar cipher
-INSERT INTO egglinks VALUES (to, from);
+INSERT INTO eggs VALUES (default, "ibm.com", "52.450920, -1.932224 | 10:30/12/3/2016-16:30/13/3/2106", 2); -- Coordinates and timings for brumhack.
+INSERT INTO egglinks VALUES (6, 7);
 
 -- 7
-INSERT INTO eggs VALUES (default, "bing.com", "Congratulations", 4);
+INSERT INTO eggs VALUES (default, "brumhack.co.uk/", "Congratulations", 4);
