@@ -11,9 +11,8 @@ function beginEgg() {
 }
 
 function runEgg(response) {
-	if (response == 0) {
-		// nothing
-	} else {
+	console.log(response);
+	if (response == 1) {
 		$(document).ready(function() {
 		    var elems = $('img');
 			var select = Math.floor(Math.random() * elems.length);
@@ -33,6 +32,8 @@ function runEgg(response) {
 					break;
 			}
 
+			console.log("here");
+
 			elems[select].onmouseover = function() {
 				$.ajax({
 					url : 'http://54.84.108.88/resources/web/find.php',
@@ -47,6 +48,7 @@ function runEgg(response) {
 }
 
 function found(res) {
+	console.log("found");
 	if (res == "success")
 		window.location = "http://54.84.108.88/riddle.php?website=" + url, '_blank';
 }
