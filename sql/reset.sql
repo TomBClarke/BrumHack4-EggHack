@@ -1,3 +1,43 @@
+DROP TABLE found;
+DROP TABLE egglinks;
+DROP TABLE eggs;
+DROP TABLE user;
+
+CREATE TABLE user (
+	userid INTEGER NOT NULL AUTO_INCREMENT, 
+	username VARCHAR(40) NOT NULL UNIQUE,
+	name VARCHAR(40) NOT NULL, 
+	password VARCHAR(20) NOT NULL, 
+	public BOOLEAN NOT NULL, 
+	PRIMARY KEY (userid)
+);
+
+CREATE TABLE eggs (
+	eggid INTEGER NOT NULL AUTO_INCREMENT, 
+	location VARCHAR(100) NOT NULL,
+	riddle VARCHAR(100000000) NOT NULL,
+	value INTEGER, 
+	PRIMARY KEY (eggid),
+	CHECK (value > 0)
+);
+
+CREATE TABLE egglinks (
+	eggfrom INTEGER NOT NULL, 
+	eggto INTEGER NOT NULL, 
+	FOREIGN KEY (eggfrom) REFERENCES eggs(eggid), 
+	FOREIGN KEY (eggto) REFERENCES eggs(eggid),
+	PRIMARY KEY (eggfrom, eggto)
+);
+
+CREATE TABLE found (
+	userid INTEGER NOT NULL,
+	eggid INTEGER NOT NULL,
+	foundat DATETIME NOT NULL,
+	FOREIGN KEY (userid) REFERENCES user(userid), 
+	FOREIGN KEY (eggid) REFERENCES eggs(eggid),
+	PRIMARY KEY (userid, eggid)
+);
+
 -- 1
 INSERT INTO eggs VALUES (default, "The Start Address", "Where it all begins.", 0);
 

@@ -4,16 +4,6 @@ var force;
 var width;
 var height;
 
-var testJSON = [
-    { id: 0, location: "google.com", riddle: "riddle", value: 1, tos: [1, 2] },
-    { id: 1, location: "youtube.com", riddle: "riddle", value: 2, tos: [2] },
-    { id: 2, location: "facebook.com", riddle: "riddle", value: 2, tos: [3, 4, 5] },
-    { id: 3, location: "twitter.com", riddle: "riddle", value: 4, tos: [] },
-    { id: 4, location: "bing.com", riddle: "riddle", value: 3, tos: [5] },
-    { id: 5, location: "example.com", riddle: "riddle", value: 3, tos: [6] },
-    { id: 6, location: "d3.com", riddle: "riddle", value: 3, tos: [7] }
-];
-
 function makeTree(rawJSON) {
     width = $(window).width();
     height = $(window).height();
@@ -31,7 +21,6 @@ function makeTree(rawJSON) {
             .linkStrength(0.1)
             .size([width, height]);
 
-    
     var svg = d3.select("#tree")
             .append("svg")
             .attr("width", width)

@@ -7,8 +7,4 @@
 	} else {
 		echo 0;
 	}
-
-	function filterURL($input) {
-		return $input;
-	}
 ?>

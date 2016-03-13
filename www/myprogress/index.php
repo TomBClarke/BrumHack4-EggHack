@@ -1,3 +1,12 @@
+<?php 
+    session_start();
+    if(isset($_SESSION['user']) == 1) {
+    //    header("Location: /index.php");
+    }
+    include( "../resources/web/sql.php"); 
+    include("../resources/web/meta.php");
+?>
+
 <html>
     <head>
         <title>Egg Hack - My Progress</title>
@@ -6,7 +15,7 @@
         <script src="myprogress.js"></script>
         <link type="text/css" rel="stylesheet" href="myprogress.css" />
     </head>
-    <body onload="makeTree(HERE);">
+    <body onload="makeTree("<?php echo getGottenEggs($_SESSION['user']['userid']); ?>");">
         <div id="logo">
             <img src="/resources/EggHack.png"></img>
         </div>

@@ -19,12 +19,8 @@
 
 <body>
 
-<?php
-	echo "Logged in as: " . $_SESSION['user']['name'] . " (" . $_SESSION['user']['username'] . ")";
-?>
+<?php echo "Logged in as: " . $_SESSION['user']['name'] . " (" . $_SESSION['user']['username'] . ")"; ?>
 <a href="logout.php?viaExtension=true">Logout</a>
-
-<script> beginEgg(); </script>
 
 </body>
 

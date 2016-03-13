@@ -1,17 +1,16 @@
-var location = window.location.href;
+var url = window.location.hostname;
 
 function beginEgg() {
 	$.ajax({
-		url : 'http://54.84.108.88/rescources/web/isegg.php',
+		url : 'http://localhost/resources/web/isegg.php',
 		type: 'POST',
     	async: false,
-		data: { website: location },
-		success : runEgg(response)
+		data: { website: url },
+		success: runEgg
 	});
 }
 
 function runEgg(response) {
-	console.log(response)
 	if (response == 0) {
 		// nothing
 	} else {
@@ -19,24 +18,39 @@ function runEgg(response) {
 		    var elems = $('img');
 			var select = Math.floor(Math.random() * elems.length);
 
-			// need a switch here:
-			elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackGreen.png');
-
+			switch (response) {
+				case 1:
+					elems[select].setAttribute("src", 'http://localhost/resources/img/EggHackGreen.png');
+					break;
+				case 2:
+					elems[select].setAttribute("src", 'http://localhost/resources/img/EggHackBlue.png');
+					break;
+				case 3:
+					elems[select].setAttribute("src", 'http://localhost/resources/img/EggHackRed.png');
+					break;
+				case 4:
+					elems[select].setAttribute("src", 'http://localhost/resources/img/EggHackGold.png');
+					break;
+			}
 
 			elems[select].onmouseover = function() {
 				$.ajax({
-					url : 'http://54.84.108.88/rescources/web/find.php',
+					url : 'http://localhost/resources/web/find.php',
 					type: 'POST',
 			    	async: false,
-					data: { website: location },
-					success : found(response)
+					data: { website: url },
+					success : found
 				});
 	   		};
-	   	}
+	   	});
 	}
 }
 
 function found(res) {
 	if (res == "success")
-		window.open("http://54.84.108.88/riddle.php?website=" + location, '_blank');
+		window.open("http://localhost/riddle.php?website=" + url, '_blank');
+	else
+		document.write(res);
 }
+
+beginEgg();
