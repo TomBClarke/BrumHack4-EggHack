@@ -60,7 +60,7 @@
         <button type="submit">Sign up</button>
     </form>
 
-    <h2>Or <a href="signin.php">sign in</a> and download the <a href="/">extension</a></h2>
+    <h2>Or <a href="signin.php">sign in</a> and download the <a href="http://54.84.108.88/resources/extension.crx" download>extension</a></h2>
     <?php } else { ?>
     <?php if(isset($_POST["signupsuccess"]) and $_POST[ "signupsuccess"]=== true) ?>
     <?php echo "Logged in as: " . $_SESSION['user']['name'] . " (" . $_SESSION['user']['username'] . ")"; ?>
