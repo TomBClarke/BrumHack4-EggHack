@@ -48,9 +48,7 @@ function runEgg(response) {
 
 function found(res) {
 	if (res == "success")
-		window.open("http://localhost/riddle.php?website=" + url, '_blank');
-	else
-		document.write(res);
+		window.location = "http://localhost/riddle.php?website=" + url, '_blank';
 }
 
 beginEgg();
