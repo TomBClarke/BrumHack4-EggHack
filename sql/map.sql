@@ -11,10 +11,10 @@ INSERT INTO eggs VALUES (default, "stackoverflow.com", "Your gracious hosts.", 1
 INSERT INTO eggs VALUES (default, "tombclarke.co.uk", "I want it that way~ - Weird Al", 1); -- Ebay
 
 -- 5
-INSERT INTO eggs VALUES (default, "ebay.co.uk", "129.42", 1); -- Part 1 of ip address
+INSERT INTO eggs VALUES (default, "ebay.co.uk", "Some numbers 129.42", 1); -- Part 1 of ip address
 
 -- 6
-INSERT INTO eggs VALUES (default, "birmingham.ac.uk", "38.1", 1); -- Part 2 of ip address
+INSERT INTO eggs VALUES (default, "birmingham.ac.uk", "Some more numbers 38.1", 1); -- Part 2 of ip address
 
 -- 7
 INSERT INTO eggs VALUES (default, "ibm.com", "52.450920, -1.932224 | 10:30/12/3/2016-16:30/13/3/2106", 2); -- Coordinates and timings for brumhack.
@@ -30,6 +30,3 @@ INSERT INTO egglinks VALUES (4, 5);
 INSERT INTO egglinks VALUES (5, 7);
 INSERT INTO egglinks VALUES (6, 7);
 INSERT INTO egglinks VALUES (7, 8);
-
--- working - 		IBM, ebay, bbc news, MLH, brumhack, stackoverflow, our site, tombclarke.co.uk, bham
--- not working - 	youtube, amazon, twitter, facebook
