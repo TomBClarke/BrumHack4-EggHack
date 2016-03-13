@@ -2,7 +2,7 @@ var url = window.location.hostname;
 
 function beginEgg() {
 	$.ajax({
-		url : 'http://localhost/resources/web/isegg.php',
+		url : 'http://54.84.108.88/resources/web/isegg.php',
 		type: 'POST',
     	async: false,
 		data: { website: url },
@@ -20,22 +20,22 @@ function runEgg(response) {
 
 			switch (response) {
 				case 1:
-					elems[select].setAttribute("src", 'http://localhost/resources/img/EggHackGreen.png');
+					elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackGreen.png');
 					break;
 				case 2:
-					elems[select].setAttribute("src", 'http://localhost/resources/img/EggHackBlue.png');
+					elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackBlue.png');
 					break;
 				case 3:
-					elems[select].setAttribute("src", 'http://localhost/resources/img/EggHackRed.png');
+					elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackRed.png');
 					break;
 				case 4:
-					elems[select].setAttribute("src", 'http://localhost/resources/img/EggHackGold.png');
+					elems[select].setAttribute("src", 'http://54.84.108.88/resources/img/EggHackGold.png');
 					break;
 			}
 
 			elems[select].onmouseover = function() {
 				$.ajax({
-					url : 'http://localhost/resources/web/find.php',
+					url : 'http://54.84.108.88/resources/web/find.php',
 					type: 'POST',
 			    	async: false,
 					data: { website: url },
@@ -48,7 +48,7 @@ function runEgg(response) {
 
 function found(res) {
 	if (res == "success")
-		window.location = "http://localhost/riddle.php?website=" + url, '_blank';
+		window.location = "http://54.84.108.88/riddle.php?website=" + url, '_blank';
 }
 
 beginEgg();

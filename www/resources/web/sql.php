@@ -6,8 +6,8 @@ function filterURL($input) {
 }
 
 function connect() {
-	// $db = mysqli_connect("localhost", "root", "correcthorsebatterystaple", "egghack");
-	$db = mysqli_connect("localhost", "root", "", "egghack");
+	$db = mysqli_connect("localhost", "root", "correcthorsebatterystaple", "egghack");
+	// $db = mysqli_connect("localhost", "root", "", "egghack");
 	if (mysqli_connect_errno()) {
 	    printf("Connect failed: %s\n", mysqli_connect_error());
 	}
