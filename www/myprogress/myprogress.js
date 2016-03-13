@@ -69,35 +69,35 @@ function makeTree(rawJSON) {
     var red = node
                 .filter(function(d) { return d.value == 3; })
                 .append("image")
-                .attr("xlink:href", "/resources/EggHackRed.png")
+                .attr("xlink:href", "/resources/img/EggHackRed.png")
                 .attr("width", 50)
                 .attr("height", 50);
     
     var blue = node
                 .filter(function(d) { return d.value == 2; })
                 .append("image")
-                .attr("xlink:href", "/resources/EggHackBlue.png")
+                .attr("xlink:href", "/resources/img/EggHackBlue.png")
                 .attr("width", 50)
                 .attr("height", 50);
     
     var green = node
                 .filter(function(d) { return d.value == 1; })
                 .append("image")
-                .attr("xlink:href", "/resources/EggHackGreen.png")
+                .attr("xlink:href", "/resources/img/EggHackGreen.png")
                 .attr("width", 50)
                 .attr("height", 50);
     
     var gray = node
                 .filter(function(d) { return d.value == 0; })
                 .append("image")
-                .attr("xlink:href", "/resources/EggHackGrey.png")
+                .attr("xlink:href", "/resources/img/EggHackGrey.png")
                 .attr("width", 50)
                 .attr("height", 50);
     
     var gold = node
                 .filter(function(d) { return d.value == 4; })
                 .append("image")
-                .attr("xlink:href", "/resources/EggHackGold.png")
+                .attr("xlink:href", "/resources/img/EggHackGold.png")
                 .attr("width", 50)
                 .attr("height", 50);
     
