@@ -63,10 +63,13 @@
     <h2>Or <a href="signin.php">sign in</a> and download the <a href="/">extension</a></h2>
     <?php } else { ?>
     <?php if(isset($_POST["signupsuccess"]) and $_POST[ "signupsuccess"]=== true) ?>
+    <?php echo "Logged in as: " . $_SESSION['user']['name'] . " (" . $_SESSION['user']['username'] . ")"; ?>
     <h2>To begin download our <a href="/">extension</a> and begin the hunt!</h2>
     <h2>Check your <a href="/myprogress">stats</a>.</h2>
     <a href="logout.php">Logout</a>
     <?php } ?>
+
+    <div id="bottom">By <a href="http://tombclarke.co.uk">Tom Clarke</a>, Cameron Angus and Rowan Cole</div>
 </body>
 
 </html>

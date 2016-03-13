@@ -60,6 +60,7 @@
 	<?php } else { ?>
 	<p>Need an account? <a href="index.php">Sign up</a></p>
 	<?php } ?>
+	<div id="bottom">By <a href="http://tombclarke.co.uk">Tom Clarke</a>, Cameron Angus and Rowan Cole</div>
 </body>
 
 </html>

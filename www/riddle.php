@@ -28,6 +28,7 @@
     <h2>You found <?php echo $result['location']; ?> and earned <?php echo $result['value']; ?> points!</h2>
     <h2>Your next riddle is...</h2>
     <h3><?php echo $result['riddle']; ?></h3>
+    <div id="bottom">By <a href="http://tombclarke.co.uk">Tom Clarke</a>, Cameron Angus and Rowan Cole</div>
 </body>
 
 </html>

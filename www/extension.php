@@ -21,6 +21,7 @@
 
 <?php echo "Logged in as: " . $_SESSION['user']['name'] . " (" . $_SESSION['user']['username'] . ")"; ?>
 <a href="logout.php?viaExtension=true">Logout</a>
+<div id="bottom">By <a href="http://tombclarke.co.uk">Tom Clarke</a>, Cameron Angus and Rowan Cole</div>
 
 </body>
 
