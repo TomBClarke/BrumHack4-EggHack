@@ -8,17 +8,24 @@
 	$loggedin = isset($_SESSION['user']);
 	$error_signup = false;
 
-	if (!$loggedin and isset($_POST["username"]) and isset($_POST["name"]) and isset($_POST["password"]) and isset($_POST["confirm"]) and isset($_POST["visible"])) {
+	if (!$loggedin and isset($_POST["username"]) and isset($_POST["name"]) and isset($_POST["password"]) and isset($_POST["confirm"])) {
 		$user = $_POST["username"];
 		$name = $_POST["name"];
 		$pwd = $_POST["password"];
 		$confirm = $_POST["confirm"];
-		$visible = $_POST["visible"];
 
-		if ($pwd == "" || $pwd != $confirm) {
+        // This doesn't work but ah well
+        if (isset($_POST["visible"])) {
+	        $visible =  1;
+            echo $_POST["visible"] ;
+        } else {
+            $visible =  0;
+        }
+
+		if ($user == "" || $name == "" || $pwd == "" || $pwd != $confirm) {
 			$error_signup = true;
 		} else {
-			$error_signup = !createUser($user, $name, $pwd, $visible);
+			$error_signup = !createUser($user, $name, $pwd, 1);
 		}
 	}
 ?>
@@ -54,7 +61,7 @@
         <button type="submit">Sign up</button>
     </form>
 
-    <h2>Or <span>sign in</span> and download the <a href="/">extension</a></h2>
+    <h2>Or <a href="signin.php">sign in</a> and download the <a href="/">extension</a></h2>
     <?php } else { ?>
     <?php if(isset($_POST["signupsuccess"]) and $_POST[ "signupsuccess"]=== true) ?>
     <h2>To begin download our <a href="/">extension</a> and begin the hunt!</h2>
