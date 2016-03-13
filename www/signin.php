@@ -49,9 +49,9 @@
 	    <?php } ?>
 
 	    <h2 class="form-signin-heading">Registration</h2> Username:
-	    <input name="username" type="text" placeholder="Username"> Password:
+	    <input name="username" type="text" placeholder="Username"> <br/>Password:
 	    <input name="password" type="password" placeholder="Password">
-
+            <br/>
 	    <button type="submit">Sign in</button>
 	</form>
 
