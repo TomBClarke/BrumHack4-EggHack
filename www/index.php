@@ -42,7 +42,7 @@
     <form action="index.php" method="post" id="form-signup">
         <?php if ($error_signup) {?>
         <h2>Error signing-up</h2>
-        <?php } ?>
+        <?php echo $mysqli->error; } ?>
 
         <h2 class="form-signin-heading">Registration</h2> Username:
         <input name="username" type="text" placeholder="Username"> Name:
