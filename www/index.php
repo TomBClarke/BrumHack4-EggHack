@@ -55,7 +55,7 @@
         <input name="name" type="text" placeholder="Name"><br/> Password:
         <input name="password" type="password" placeholder="Password"><br/> Confirm Password:
         <input name="confirm" type="password" placeholder="Confirm Password"><br/>
-        <input name="visible" type="checkbox" checked><br/>Make my score public
+        <input name="visible" type="checkbox" checked>Make my score public
         <br/>
         <button type="submit">Sign up</button>
     </form>
