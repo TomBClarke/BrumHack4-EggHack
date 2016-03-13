@@ -25,6 +25,8 @@ function createUser($user, $name, $pwd, $visible) {
 		$visible
 	);
 
+	echo $sql;
+
 	$result = mysql_query($sql, $db);
 
     mysqli_close($db);
@@ -44,6 +46,8 @@ function loadUser($user, $password) {
 		mysql_real_escape_string($password)
 	);
 
+	echo $sql;
+
 	$result = mysql_query($sql, $db);
 
     mysqli_close($db);
@@ -58,6 +62,8 @@ function getUserPoints($userid) {
 	$sql = sprintf("SELECT sum(E.value) AS total FROM eggs E WHERE E.eggid in (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
 		mysql_real_escape_string($userid)
 	);
+
+	echo $sql;
 
 	$result = mysql_query($sql, $db);
 
@@ -76,6 +82,8 @@ function getegg($userid, $site) {
 	$sql = sprintf("SELECT E.location, E.value FROM eggs E WHERE E.eggid in (SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d'));",
 		mysql_real_escape_string($userid)
 	);
+
+	echo $sql;
 
 	$result = mysql_query($sql, $db);
 
@@ -100,6 +108,8 @@ function setFound($userid, $eggid) {
 		mysql_real_escape_string($userid)
 	);
 
+	echo $sql;
+
 	$result = mysql_query($sql, $db);
 
 	if(!$result)
@@ -119,6 +129,8 @@ function setFound($userid, $eggid) {
 		mysql_real_escape_string($eggid)
 	);
 
+	echo $sql;
+
 	$result = mysql_query($sql, $db);
 
     if(!$result)
@@ -129,6 +141,8 @@ function setFound($userid, $eggid) {
     $sql = sprintf("SELECT E.riddle FROM eggs E WHERE E.eggid = '%d';",
 		mysql_real_escape_string($eggid)
 	);
+
+	echo $sql;
 
 	$result = mysql_query($sql, $db);
 
@@ -149,6 +163,8 @@ function getGottenEggs($userID) {
 		mysql_real_escape_string($userID)
 	);
 	$sql = "SELECT E.eggid, E.location, E.riddle, E.value FROM eggs E WHERE E.eggid IN ( " . $sql . " ) ORDER BY E.eggid;";
+
+	echo $sql;
 
 	$result = mysql_query($sql, $db);
 
