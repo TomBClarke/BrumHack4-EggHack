@@ -5,13 +5,10 @@ $db = null;
 function connect() {
 	$db = null;
 
-	$db = mysql_connect("localhost", "root", "correcthorsebatterystaple");
-	if(!$db)
-		die("Couldn't connect to the MySQL server.");
-
-	$use = mysql_select_db("egghack", $db);
-	if(!$use)
-		die("Couldn't select database.");
+	$db = mysqli_connect("localhost", "root", "correcthorsebatterystaple", "egghack");
+	if (mysqli_connect_errno()) {
+	    printf("Connect failed: %s\n", mysqli_connect_error());
+	}
 }
 
 // create user
@@ -19,9 +16,9 @@ function createUser($user, $name, $pwd, $visible) {
 	connect();
 
 	$sql = sprintf("INSERT INTO user VALUES (default, '%s', '%s', '%s', " . $visible . ");",
-		mysql_real_escape_string($user),
-		mysql_real_escape_string($name),
-		mysql_real_escape_string($pwd)
+		mysqli_real_escape_string($user),
+		mysqli_real_escape_string($name),
+		mysqli_real_escape_string($pwd)
 	);
 
 	echo $sql;
@@ -41,8 +38,8 @@ function loadUser($user, $password) {
 	connect();
 
 	$sql = sprintf("SELECT U.userid, U.username, U.name FROM user U WHERE U.username = '%s' AND U.password = '%s';",
-		mysql_real_escape_string($user),
-		mysql_real_escape_string($password)
+		mysqli_real_escape_string($user),
+		mysqli_real_escape_string($password)
 	);
 
 	echo $sql;
@@ -59,7 +56,7 @@ function getUserPoints($userid) {
 	connect();
 
 	$sql = sprintf("SELECT sum(E.value) AS total FROM eggs E WHERE E.eggid in (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
-		mysql_real_escape_string($userid)
+		mysqli_real_escape_string($userid)
 	);
 
 	echo $sql;
@@ -79,7 +76,7 @@ function getegg($userid, $site) {
 	connect();
 
 	$sql = sprintf("SELECT E.location, E.value FROM eggs E WHERE E.eggid in (SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d'));",
-		mysql_real_escape_string($userid)
+		mysqli_real_escape_string($userid)
 	);
 
 	echo $sql;
@@ -91,7 +88,7 @@ function getegg($userid, $site) {
 	if(!$result)
     	return 0;
 
-    while($row = mysql_fetch_array($result)) {
+    while($row = mysqli_fetch_array($result)) {
     	if ($site == $row['location'])
     		return $row['value'];
     }
@@ -104,7 +101,7 @@ function setFound($userid, $eggid) {
 	connect();
 
 	$sql = sprintf("SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
-		mysql_real_escape_string($userid)
+		mysqli_real_escape_string($userid)
 	);
 
 	echo $sql;
@@ -115,7 +112,7 @@ function setFound($userid, $eggid) {
     	return "fail";
 
     $matching = false;
-    while($row = mysql_fetch_array($result)) {
+    while($row = mysqli_fetch_array($result)) {
 		if ($eggid == $row['eggto'])
 			$matching = true;
     }
@@ -124,8 +121,8 @@ function setFound($userid, $eggid) {
     	return "fail";
 
 	$sql = sprintf("INSERT INTO found VALUES ('%d', '%d', now());",
-		mysql_real_escape_string($userid),
-		mysql_real_escape_string($eggid)
+		mysqli_real_escape_string($userid),
+		mysqli_real_escape_string($eggid)
 	);
 
 	echo $sql;
@@ -138,7 +135,7 @@ function setFound($userid, $eggid) {
     mysqli_close($db);
 
     $sql = sprintf("SELECT E.riddle FROM eggs E WHERE E.eggid = '%d';",
-		mysql_real_escape_string($eggid)
+		mysqli_real_escape_string($eggid)
 	);
 
 	echo $sql;
@@ -150,7 +147,7 @@ function setFound($userid, $eggid) {
 
     mysqli_close($db);
 
-    $row = mysql_fetch_array($result);
+    $row = mysqli_fetch_array($result);
     return $row['riddle'];
 }
 
@@ -159,7 +156,7 @@ function getGottenEggs($userID) {
 	connect();
 
 	$sql = sprintf("SELECT F.eggid FROM found F WHERE F.userid = '$d'", 
-		mysql_real_escape_string($userID)
+		mysqli_real_escape_string($userID)
 	);
 	$sql = "SELECT E.eggid, E.location, E.riddle, E.value FROM eggs E WHERE E.eggid IN ( " . $sql . " ) ORDER BY E.eggid;";
 
@@ -168,20 +165,20 @@ function getGottenEggs($userID) {
 	$result = mysqli_query($db, $sql);
 
     if(!$result)
-    	die("Query failed: " . mysql_error());
+    	die("Query failed: " . $db->error);
 
     $json = "";
-    while($row = mysql_fetch_array($result)) {
+    while($row = mysqli_fetch_array($result)) {
 		$json = $json . "{id:" . $row['eggid'] . ",location:" . $row['location'] . ",riddle:" . $row['riddle'] . ",value:" . $row['value'];
 
     	$sql = "SELECT L.eggto FROM egglinks L WHERE L.getfrom = " . $row['eggid'] . "ORDER BY L.eggto;";
     	$rresult = mysqli_query($db, $sql);
 
     	if(!$rresult)
-	    	die("Query failed: " . mysql_error());
+	    	die("Query failed: " . $db->error);
 
 	    $tos = "";
-	    while($rrow = mysql_fetch_array($rresult)) {
+	    while($rrow = mysqli_fetch_array($rresult)) {
 	    	$tos = $tos . $rrow['eggot'] . ",";
 	    }
 	    $tos = rtrim($tos, ",");
