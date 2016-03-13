@@ -8,17 +8,17 @@
 	$loggedin = isset($_SESSION['user']);
 	$error_signup = false;
 
-	if (!$loggedin and isset($_POST["username"]) and isset($_POST["name"]) and isset($_POST["password"]) and isset($_POST["confirm"]) and isset($_POST["visible"])) {
+	if (!$loggedin and isset($_POST["username"]) and isset($_POST["name"]) and isset($_POST["password"]) and isset($_POST["confirm"])) {
 		$user = $_POST["username"];
 		$name = $_POST["name"];
 		$pwd = $_POST["password"];
 		$confirm = $_POST["confirm"];
-		$visible = $_POST["visible"];
+		$visible =  isset($_POST["visible"]) ? 1 : 0;
 
 		if ($pwd == "" || $pwd != $confirm) {
 			$error_signup = true;
 		} else {
-			$error_signup = !createUser($user, $name, $pwd, $visible);
+			$error_signup = !createUser($user, $name, $pwd, 1);
 		}
 	}
 ?>

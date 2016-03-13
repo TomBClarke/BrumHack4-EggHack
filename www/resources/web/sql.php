@@ -18,11 +18,10 @@ function connect() {
 function createUser($user, $name, $pwd, $visible) {
 	connect();
 
-	$sql = sprintf("INSERT INTO user VALUES (default, '%s', '%s', '%s', '%b');",
+	$sql = sprintf("INSERT INTO user VALUES (default, '%s', '%s', '%s', " . $visible . ");",
 		mysql_real_escape_string($user),
 		mysql_real_escape_string($name),
-		mysql_real_escape_string($pwd),
-		$visible
+		mysql_real_escape_string($pwd)
 	);
 
 	echo $sql;
