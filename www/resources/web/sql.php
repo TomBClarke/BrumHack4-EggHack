@@ -55,7 +55,7 @@ function loadUser($user, $password) {
 function getUserPoints($userid) {
 	connect();
 
-	$sql = sprintf($sql = sprintf("SELECT sum(E.value) AS total FROM eggs E WHERE E.eggid in (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
+	$sql = sprintf("SELECT sum(E.value) AS total FROM eggs E WHERE E.eggid in (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
 		mysql_real_escape_string($userid)
 	);
 
@@ -73,7 +73,7 @@ function getUserPoints($userid) {
 function getegg($userid, $site) {
 	connect();
 
-	$sql = sprintf($sql = sprintf("SELECT E.location, E.value FROM eggs E WHERE E.eggid in (SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d'));",
+	$sql = sprintf("SELECT E.location, E.value FROM eggs E WHERE E.eggid in (SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d'));",
 		mysql_real_escape_string($userid)
 	);
 
@@ -96,7 +96,7 @@ function getegg($userid, $site) {
 function setFound($userid, $eggid) {
 	connect();
 
-	$sql = sprintf($sql = sprintf("SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
+	$sql = sprintf("SELECT L.eggto FROM egglinks L WHERE L.eggfrom IN (SELECT F.eggid FROM found F WHERE F.userid = '%d');",
 		mysql_real_escape_string($userid)
 	);
 
@@ -137,7 +137,7 @@ function setFound($userid, $eggid) {
 
     mysql_close($db);
 
-    $row = mysql_fetch_array($result)
+    $row = mysql_fetch_array($result);
     return $row['riddle'];
 }
 

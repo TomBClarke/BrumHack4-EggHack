@@ -19,10 +19,10 @@ function createUser(user, name, pwd, visible) {
 	connect();
 
 	$sql = sprintf("INSERT INTO user VALUES (default, '%s', '%s', '%s', '%b');",
-		mysql_real_escape_string(user),
-		mysql_real_escape_string(name),
-		mysql_real_escape_string(pwd),
-		visible
+		mysql_real_escape_string($user),
+		mysql_real_escape_string($name),
+		mysql_real_escape_string($pwd),
+		$visible
 	);
 
 	$result = mysql_query($sql, $db);
@@ -39,8 +39,8 @@ function setFound(userid, eggid) {
 	connect();
 
 	$sql = sprintf("INSERT INTO found VALUES ('%d', '%d', now());",
-		mysql_real_escape_string(userid),
-		mysql_real_escape_string(eggid)
+		mysql_real_escape_string($userid),
+		mysql_real_escape_string($eggid)
 	);
 
 	$result = mysql_query($sql, $db);
@@ -53,12 +53,13 @@ function setFound(userid, eggid) {
 }
 
 // returns { eggid: 0, location: google.com, value: 1, tos: [id, id, id...] }
-function getGottenEggs(userID) {
+function getGottenEggs($userID) {
 	connect();
 
 	$sql = sprintf("SELECT F.eggid FROM found F WHERE F.userid = '$d'", 
-		mysql_real_escape_string(userID)
+		mysql_real_escape_string($userID)
 	);
+	
 	$sql = "SELECT E.eggid, E.location, E.value FROM eggs E WHERE E.eggid IN ( " . $sql . " ) ORDER BY E.eggid;";
 
 	$result = mysql_query($sql, $db);

@@ -1,3 +1,5 @@
+<link rel="icon" type="image/png" href="/resources/img/EggHackLogo32x32.png">
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#202020">
