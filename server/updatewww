@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git pull
+sudo rm -rf /var/www/html
+sudo cp -r /home/ec2-user/BrumHack4-EggHack/www/* /var/www/html/
+echo "updated /varwww/html"
