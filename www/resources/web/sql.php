@@ -5,7 +5,7 @@ $db = null;
 function connect() {
 	$db = null;
 
-	$db = mysql_connect("localhost", "egghack");
+	$db = mysql_connect("localhost", "root", "correcthorsebatterystaple");
 	if(!$db)
 		die("Couldn't connect to the MySQL server.");
 
