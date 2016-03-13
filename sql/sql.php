@@ -25,7 +25,7 @@ function createUser(user, name, pwd, visible) {
 		$visible
 	);
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
 	if(!$result)
     	die("Query failed: " . mysql_error());
@@ -43,7 +43,7 @@ function setFound(userid, eggid) {
 		mysql_real_escape_string($eggid)
 	);
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
 	if(!$result)
     	die("Query failed: " . mysql_error());
@@ -62,7 +62,7 @@ function getGottenEggs($userID) {
 	
 	$sql = "SELECT E.eggid, E.location, E.value FROM eggs E WHERE E.eggid IN ( " . $sql . " ) ORDER BY E.eggid;";
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
     if(!$result)
     	die("Query failed: " . mysql_error());
@@ -72,7 +72,7 @@ function getGottenEggs($userID) {
 		$json = $json . "{id:" . $row['eggid'] . ",location:" . $row['location'] . ",value:" . $row['value'];
 
     	$sql = "SELECT L.eggto FROM egglinks L WHERE L.getfrom = " . $row['eggid'] . "ORDER BY L.eggto;";
-    	$rresult = mysql_query($sql, $db);
+    	$rresult = mysqli_query($db, $sql);
 
     	if(!$rresult)
 	    	die("Query failed: " . mysql_error());

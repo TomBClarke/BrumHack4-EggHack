@@ -13,9 +13,9 @@
 		$name = $_POST["name"];
 		$pwd = $_POST["password"];
 		$confirm = $_POST["confirm"];
-		$visible =  isset($_POST["visible"]) ? 1 : 0;
+		$visible = isset($_POST["visible"]) ? 1 : 0;
 
-		if ($pwd == "" || $pwd != $confirm) {
+		if ($user == "" || $name == "" || $pwd == "" || $pwd != $confirm) {
 			$error_signup = true;
 		} else {
 			$error_signup = !createUser($user, $name, $pwd, 1);

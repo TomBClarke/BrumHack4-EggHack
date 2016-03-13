@@ -26,7 +26,7 @@ function createUser($user, $name, $pwd, $visible) {
 
 	echo $sql;
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
     mysqli_close($db);
 
@@ -47,7 +47,7 @@ function loadUser($user, $password) {
 
 	echo $sql;
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
     mysqli_close($db);
 
@@ -64,7 +64,7 @@ function getUserPoints($userid) {
 
 	echo $sql;
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
 	mysqli_close($db);
 
@@ -84,7 +84,7 @@ function getegg($userid, $site) {
 
 	echo $sql;
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
 	mysqli_close($db);
 
@@ -109,7 +109,7 @@ function setFound($userid, $eggid) {
 
 	echo $sql;
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
 	if(!$result)
     	return "fail";
@@ -130,7 +130,7 @@ function setFound($userid, $eggid) {
 
 	echo $sql;
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
     if(!$result)
     	return "fail";
@@ -143,7 +143,7 @@ function setFound($userid, $eggid) {
 
 	echo $sql;
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
     if(!$result)
     	return "GENUINE ERROR";
@@ -165,7 +165,7 @@ function getGottenEggs($userID) {
 
 	echo $sql;
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($db, $sql);
 
     if(!$result)
     	die("Query failed: " . mysql_error());
@@ -175,7 +175,7 @@ function getGottenEggs($userID) {
 		$json = $json . "{id:" . $row['eggid'] . ",location:" . $row['location'] . ",riddle:" . $row['riddle'] . ",value:" . $row['value'];
 
     	$sql = "SELECT L.eggto FROM egglinks L WHERE L.getfrom = " . $row['eggid'] . "ORDER BY L.eggto;";
-    	$rresult = mysql_query($sql, $db);
+    	$rresult = mysqli_query($db, $sql);
 
     	if(!$rresult)
 	    	die("Query failed: " . mysql_error());
