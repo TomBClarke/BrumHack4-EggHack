@@ -24,7 +24,7 @@
 ?>
 <a href="logout.php?viaExtension=true">Logout</a>
 
-<!-- need inject script to run here -->
+<script> beginEgg(); </script>
 
 </body>
 

@@ -7,7 +7,7 @@
 	include( "resources/web/sql.php"); 
 	$error_signin = false;
 
-	if (isset($_POST["username"]) and isset($_POST["password"])) {
+	if (isset($_POST["username"])) {
 		$result = loadUser($_POST["username"], $_POST["password"]);
 
 	    if (!$result or mysqli_num_rows($result) == 0) {
@@ -17,11 +17,11 @@
 		    session_regenerate_id();
 		    $_SESSION['user'] = $row;
 		    redirect();
-	  	} 
+	  	}
 	}
 
 	function redirect() {
-		if (isset($_GET["viaExtension"]) and $_GET["viaExtension"] === true) {
+		if (isset($_GET["viaExtension"])) {
 			header("Location: /extension.php");
 		} else {
 			header("Location: /index.php");
@@ -35,7 +35,7 @@
 <html>
 
 <head>
-    <title>Egg Hack</title>
+    <title>Egg Hack - Sign in</title>
     <link type="text/css" rel="stylesheet" href="resources/web/main.css" />
 </head>
 
