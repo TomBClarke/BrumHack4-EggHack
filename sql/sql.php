@@ -29,7 +29,7 @@ function createUser(user, name, pwd, visible) {
 
 	if(!$result)
     	die("Query failed: " . mysql_error());
-    mysql_close($db);
+    mysqli_close($db);
 
     // set up user i guess
 }
@@ -47,7 +47,7 @@ function setFound(userid, eggid) {
 
 	if(!$result)
     	die("Query failed: " . mysql_error());
-    mysql_close($db);
+    mysqli_close($db);
 
     // maybbe return true or false or some shit
 }
@@ -89,7 +89,7 @@ function getGottenEggs($userID) {
     $json = rtrim($json, ",");
 	$json = "[" . $json . "]";
 
-	mysql_close($db);
+	mysqli_close($db);
 
 	return $json;
 }

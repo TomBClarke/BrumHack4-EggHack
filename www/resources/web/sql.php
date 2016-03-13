@@ -27,7 +27,7 @@ function createUser($user, $name, $pwd, $visible) {
 
 	$result = mysql_query($sql, $db);
 
-    mysql_close($db);
+    mysqli_close($db);
 
 	if(!$result)
 		return false;
@@ -46,7 +46,7 @@ function loadUser($user, $password) {
 
 	$result = mysql_query($sql, $db);
 
-    mysql_close($db);
+    mysqli_close($db);
 
 	return $result;
 }
@@ -61,7 +61,7 @@ function getUserPoints($userid) {
 
 	$result = mysql_query($sql, $db);
 
-	mysql_close($db);
+	mysqli_close($db);
 
 	if(!$result)
     	return 0;
@@ -79,7 +79,7 @@ function getegg($userid, $site) {
 
 	$result = mysql_query($sql, $db);
 
-	mysql_close($db);
+	mysqli_close($db);
 
 	if(!$result)
     	return 0;
@@ -124,7 +124,7 @@ function setFound($userid, $eggid) {
     if(!$result)
     	return "fail";
 
-    mysql_close($db);
+    mysqli_close($db);
 
     $sql = sprintf("SELECT E.riddle FROM eggs E WHERE E.eggid = '%d';",
 		mysql_real_escape_string($eggid)
@@ -135,7 +135,7 @@ function setFound($userid, $eggid) {
     if(!$result)
     	return "GENUINE ERROR";
 
-    mysql_close($db);
+    mysqli_close($db);
 
     $row = mysql_fetch_array($result);
     return $row['riddle'];
@@ -177,7 +177,7 @@ function getGottenEggs($userID) {
     $json = rtrim($json, ",");
 	$json = "[" . $json . "]";
 
-	mysql_close($db);
+	mysqli_close($db);
 
 	return $json;
 }
