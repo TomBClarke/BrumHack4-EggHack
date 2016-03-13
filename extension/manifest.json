@@ -17,5 +17,9 @@
   "content_scripts": [ {
     "js": [  "jquery.min.js" , "check_page.js" ],
     "matches": [ "http://*/*", "https://*/*"]
-  }]
+  }],
+
+  "web_accessible_resources": [
+    "EggHackGreen.png"
+  ]
 }
